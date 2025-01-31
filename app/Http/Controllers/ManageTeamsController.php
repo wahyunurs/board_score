@@ -13,7 +13,9 @@ class ManageTeamsController extends Controller
      */
     public function index()
     {
+        // Get all teams
         $teams = Team::all();
+
         return view('admin.manage-teams.index', compact('teams'));
     }
 
@@ -22,10 +24,12 @@ class ManageTeamsController extends Controller
      */
     public function updateScore(Request $request, $id)
     {
+        // Input Validate
         $request->validate([
             'score' => 'required|integer',
         ]);
 
+        // Find team by ID
         $team = Team::findOrFail($id);
 
         // Update the score
@@ -40,6 +44,27 @@ class ManageTeamsController extends Controller
     }
 
     /**
+     * Display score of team.
+     */
+    public function getScore($id)
+    {
+        $team = Team::find($id);  // Pastikan ID yang diberikan valid dan tim ditemukan
+
+        if ($team) {
+            return response()->json([
+                'success' => true,
+                'new_score' => $team->score,  // Kirimkan skor terbaru
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Team not found',
+        ]);
+    }
+
+
+    /**
      * Store a newly created team in storage.
      */
     public function store(Request $request)
@@ -51,10 +76,12 @@ class ManageTeamsController extends Controller
             'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
+        // Store the team
         $team = new Team();
         $team->name = $validated['name'];
         $team->score = $validated['score'];
 
+        // Store the logo
         if ($request->hasFile('logo')) {
             $logo = $request->file('logo');
             $filename = date('Y-m-d') . '-' . $logo->getClientOriginalName();
@@ -73,19 +100,19 @@ class ManageTeamsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Validasi input
+        // Input Validate
         $request->validate([
             'name' => 'required|string|max:255',
             'score' => 'required|integer',
             'logo' => 'nullable|image|max:2048',
         ]);
 
-        // Temukan tim berdasarkan ID
+        // Find team by ID
         $team = Team::findOrFail($id);
         $team->name = $request->input('name');
         $team->score = $request->input('score');
 
-        // Periksa dan simpan logo jika ada
+        // If the logo is updated
         if ($request->hasFile('logo')) {
             $logoPath = $request->file('logo')->store('logos', 'public');
             $team->logo = $logoPath;
@@ -102,15 +129,18 @@ class ManageTeamsController extends Controller
      */
     public function destroy($id)
     {
-        // Temukan tim berdasarkan ID
+        // Find team by ID
         $team = Team::findOrFail($id);
 
-        // Hapus logo dari storage jika ada
-        if ($team->logo && Storage::exists('public/' . $team->logo)) {
-            Storage::delete('public/' . $team->logo);
+        // Delete the logo from storage
+        if ($team->logo) {
+            $logoPath = 'public/' . $team->logo;
+            if (Storage::exists($logoPath)) {
+                Storage::delete($logoPath);
+            }
         }
 
-        // Hapus tim dari database
+        // Delete the team
         $team->delete();
 
         return redirect()->route('manage-teams.index')->with('success', 'Team successfully deleted.');

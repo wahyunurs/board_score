@@ -1,7 +1,7 @@
 <!-- Main modal -->
 <div id="add-modal" tabindex="-1" aria-hidden="true"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-1/2 left-1/2 z-50 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md">
-    <div class="relative p-4 w-full max-w-md max-h-full">
+    <div class="relative p-4 w-full max-w-md max-h-full bg-opacity-50">
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow light:bg-gray-700">
             <!-- Modal header -->
@@ -53,5 +53,3 @@
         </div>
     </div>
 </div>
-
-<script src="{{ asset('js/add-team-modal.js') }}"></script>

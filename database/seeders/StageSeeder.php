@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Stage;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class StageSeeder extends Seeder
 {
@@ -12,6 +13,10 @@ class StageSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        //Seed the stages table with some data
+        Stage::create([
+            'title' => 'SEMIFINAL',
+            'description' => '-',
+        ]);
     }
 }

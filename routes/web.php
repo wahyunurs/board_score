@@ -4,8 +4,10 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ManageStageController;
 use App\Http\Controllers\ManageTeamsController;
 use App\Http\Controllers\ManageUsersController;
+use App\Http\Controllers\ManageStagesController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -30,15 +32,17 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // Routes for manage teams
     Route::get('/admin/manage-teams', [ManageTeamsController::class, 'index'])->name('manage-teams.index');
     Route::post('/admin/manage-teams/{id}/update-score', [ManageTeamsController::class, 'updateScore'])->name('admin.teams.updateScore');
+    Route::get('/admin/manage-teams/{id}/score', [ManageTeamsController::class, 'getScore']);
     Route::post('/admin/manage-teams', [ManageTeamsController::class, 'store'])->name('manage-teams.store');
     Route::put('/admin/manage-teams/{id}', [ManageTeamsController::class, 'update'])->name('manage-teams.update');
     Route::delete('/admin/manage-teams/{id}', [ManageTeamsController::class, 'destroy'])->name('manage-teams.destroy');
 
     // Routes for manage users
     Route::get('/admin/manage-users', [ManageUsersController::class, 'index'])->name('manage-users.index');
-    Route::post('/admin/manage-users', [ManageUsersController::class, 'store'])->name('manage-users.store');
-    Route::put('/admin/manage-users/{id}', [ManageUsersController::class, 'update'])->name('manage-users.update');
-    Route::delete('/admin/manage-users/{id}', [ManageUsersController::class, 'destroy'])->name('manage-users.destroy');
+
+    // Routes for manage stages
+    Route::get('/admin/manage-stages', [ManageStageController::class, 'index'])->name('manage-stages.index');
+    Route::put('/admin/manage-stages/{id}', [ManageStageController::class, 'update'])->name('manage-stages.update');
 });
 
 // Routes for user

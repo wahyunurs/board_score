@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Team;
+use App\Models\Stage;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -12,8 +13,12 @@ class UserController extends Controller
      */
     public function dashboard()
     {
+        // Get all teams
         $teams = Team::all();
-        return view('user.dashboard', compact('teams'));
+        // Find stage by ID
+        $stages = Stage::find(1);
+
+        return view('user.dashboard', compact('teams', 'stages'));
     }
 
     /**
@@ -21,10 +26,10 @@ class UserController extends Controller
      */
     public function getScore($teamId)
     {
-        // Ambil tim berdasarkan ID
+        // Find team by ID
         $team = Team::find($teamId);
 
-        // Pastikan tim ditemukan, kemudian kirimkan skor terbaru
+        // If team found
         if ($team) {
             return response()->json([
                 'success' => true,

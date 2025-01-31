@@ -35,6 +35,11 @@ class TeamSeeder extends Seeder
                 'score' => 100,
                 'logo' => null,
             ],
+            [
+                'name' => 'Tim Putih',
+                'score' => 100,
+                'logo' => null,
+            ],
         ];
 
         foreach ($teams as $team) {
