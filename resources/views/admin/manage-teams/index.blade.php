@@ -27,7 +27,7 @@
                             @foreach ($teams as $team)
                                 <tr class="bg-white border-b light:bg-gray-800 light:border-gray-700">
                                     <td class="px-6 py-1">
-                                        <img src="{{ asset('storage/' . $team->logo) }}" alt="{{ $team->name }}"
+                                        <img src="{{ asset('storage/logos/' . $team->logo) }}" alt="{{ $team->name }}"
                                             class="w-16 h-16 rounded-full">
                                     </td>
                                     <td class="px-6 py-1 font-medium text-gray-900 light:text-white">

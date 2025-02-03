@@ -15,9 +15,8 @@
 
 <body class="flex flex-col min-h-screen">
     <!-- Background Image -->
-    <!-- Background Image -->
     <div class="relative z-0 min-h-screen flex flex-col items-center justify-center bg-cover bg-center"
-        style="background-image: url('{{ asset('storage/images/user-background.jpg') }}');">
+        style="background-image: url('{{ asset('images/user-background.jpg') }}');">
         <x-navbar-user />
         <main class="flex-grow flex items-center justify-center">
             {{ $slot }}

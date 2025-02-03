@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Team;
 
 class ManageTeamsController extends Controller
 {
@@ -48,12 +48,12 @@ class ManageTeamsController extends Controller
      */
     public function getScore($id)
     {
-        $team = Team::find($id);  // Pastikan ID yang diberikan valid dan tim ditemukan
+        $team = Team::find($id);
 
         if ($team) {
             return response()->json([
                 'success' => true,
-                'new_score' => $team->score,  // Kirimkan skor terbaru
+                'new_score' => $team->score,
             ]);
         }
 
@@ -73,24 +73,24 @@ class ManageTeamsController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'score' => 'required|numeric',
-            'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'logo' => 'nullable|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
-
-        // Store the team
-        $team = new Team();
-        $team->name = $validated['name'];
-        $team->score = $validated['score'];
 
         // Store the logo
         if ($request->hasFile('logo')) {
             $logo = $request->file('logo');
-            $filename = date('Y-m-d') . '-' . $logo->getClientOriginalName();
-            $path = $logo->storeAs('public/logos', $filename);
-            $team->logo = str_replace('public/', '', $path);
+            $filename = date('Y-m-d-') . $logo->getClientOriginalName();
+            $path = 'logos/' . $filename;
+
+            Storage::disk('public')->put($path, file_get_contents($logo));
         }
 
-
-        $team->save();
+        // Create new team
+        Team::create([
+            'name' => $request->name,
+            'score' => $request->score,
+            'logo' => $filename ?? null,
+        ]);
 
         return redirect()->route('manage-teams.index')->with('success', 'Team successfully added.');
     }
@@ -104,21 +104,36 @@ class ManageTeamsController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'score' => 'required|integer',
-            'logo' => 'nullable|image|max:2048',
+            'logo' => 'nullable|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
 
         // Find team by ID
         $team = Team::findOrFail($id);
-        $team->name = $request->input('name');
-        $team->score = $request->input('score');
+        $newLogo = $team->logo;
 
         // If the logo is updated
         if ($request->hasFile('logo')) {
-            $logoPath = $request->file('logo')->store('logos', 'public');
-            $team->logo = $logoPath;
+            $logo = $request->file('logo');
+            $filename = date('Y-m-d-') . $logo->getClientOriginalName();
+            $path       = 'logos/' . $filename;
+
+            // Store the new logo
+            Storage::disk('public')->put($path, file_get_contents($logo));
+
+            // Delete the logo from storage
+            if ($team->logo) {
+                Storage::delete('public/logos/' . $team->logo);
+            }
+
+            $newLogo = $filename;
         }
 
-        $team->save();
+        // Find team by ID
+        Team::findOrFail($id)->update([
+            'name' => $request->name,
+            'score' => $request->score,
+            'logo' => $newLogo,
+        ]);
 
         return redirect()->route('manage-teams.index')->with('success', 'Team updated successfully.');
     }
@@ -134,10 +149,7 @@ class ManageTeamsController extends Controller
 
         // Delete the logo from storage
         if ($team->logo) {
-            $logoPath = 'public/' . $team->logo;
-            if (Storage::exists($logoPath)) {
-                Storage::delete($logoPath);
-            }
+            Storage::delete('public/logos/' . $team->logo);
         }
 
         // Delete the team

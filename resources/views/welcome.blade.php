@@ -23,18 +23,18 @@
 <body class="flex flex-col min-h-screen">
     <!-- Background Image -->
     <div class="relative z-0 min-h-screen flex flex-col items-center justify-center bg-cover bg-center"
-        style="background-image: url('{{ asset('storage/images/user-background.jpg') }}');">
+        style="background-image: url('{{ asset('images/user-background.jpg') }}');">
 
         <!-- Navbar -->
         <nav class="bg-gray-900 border-gray-200 dark:bg-gray-900 w-full">
             <div class="flex items-center justify-between mx-auto p-4 w-full">
                 <div class="flex-1 flex justify-center gap-4">
-                    <img class="w-8 h-8" src="{{ asset('storage/images/logo-udinus.png') }}" alt="Udinus">
-                    <img class="w-8 h-8" src="{{ asset('storage/images/logo-unggul.png') }}" alt="Unggul">
-                    <img class="w-8 h-8" src="{{ asset('storage/images/logo-dpm.png') }}" alt="DPMKM Udinus">
-                    <img class="w-8 h-8" src="{{ asset('storage/images/logo-parlemen.png') }}" alt="Parlemen">
-                    <img class="w-8 h-8" src="{{ asset('storage/images/logo-dinusfest.png') }}" alt="Dinus Fest">
-                    <img class="w-8 h-8" src="{{ asset('storage/images/logo-gkc.png') }}" alt="GKC">
+                    <img class="w-8 h-8" src="{{ asset('images/logo-udinus.png') }}" alt="Udinus">
+                    <img class="w-8 h-8" src="{{ asset('images/logo-unggul.png') }}" alt="Unggul">
+                    <img class="w-8 h-8" src="{{ asset('images/logo-dpm.png') }}" alt="DPMKM Udinus">
+                    <img class="w-8 h-8" src="{{ asset('images/logo-parlemen.png') }}" alt="Parlemen">
+                    <img class="w-8 h-8" src="{{ asset('images/logo-dinusfest.png') }}" alt="Dinus Fest">
+                    <img class="w-8 h-8" src="{{ asset('images/logo-gkc.png') }}" alt="GKC">
                 </div>
                 <div class="flex items-center space-x-3 justify-end">
                     @if (Route::has('login'))
@@ -77,14 +77,12 @@
                 <div class="flex items-center gap-4">
                     <p class="font-semibold">Supported by :</p>
                     <div class="flex gap-4">
-                        <img class="w-8 h-8" src="{{ asset('storage/images/logo-foj.png') }}" alt="FOJ">
-                        <img class="w-13 h-8" src="{{ asset('storage/images/logo-seputar-info-id.jpg') }} "
+                        <img class="w-8 h-8" src="{{ asset('images/logo-foj.png') }}" alt="FOJ">
+                        <img class="w-13 h-8" src="{{ asset('images/logo-seputar-info-id.jpg') }} "
                             alt="Seputar Info Id">
-                        <img class="w-13 h-8" src="{{ asset('storage/images/logo-lomba-sma.png') }}" alt="Lomba SMA">
-                        <img class="w-13 h-8" src="{{ asset('storage/images/logo-pojok-event.jpeg') }}"
-                            alt="Pojok Event">
-                        <img class="w-13 h-8" src="{{ asset('storage/images/logo-partner-event.png') }}"
-                            alt="Partner Event">
+                        <img class="w-13 h-8" src="{{ asset('images/logo-lomba-sma.png') }}" alt="Lomba SMA">
+                        <img class="w-13 h-8" src="{{ asset('images/logo-pojok-event.jpeg') }}" alt="Pojok Event">
+                        <img class="w-13 h-8" src="{{ asset('images/logo-partner-event.png') }}" alt="Partner Event">
                     </div>
                 </div>
 
@@ -92,11 +90,10 @@
                 <div class="flex items-center gap-4">
                     <p class="font-semibold">Sponsored by :</p>
                     <div class="flex gap-4">
-                        <img class="w-8 h-8" src="{{ asset('storage/images/logo-ss.jpeg') }}" alt="Spesial Sambal">
-                        <img class="w-13 h-8" src="{{ asset('storage/images/logo-ruang-guru.jpg') }}" alt="Ruang Guru">
-                        <img class="w-13 h-8" src="{{ asset('storage/images/logo-bank-jateng.jpg') }} "
-                            alt="Bank Jateng">
-                        <img class="w-10 h-8" src="{{ asset('storage/images/logo-virgin.png') }}" alt="Virgin">
+                        <img class="w-8 h-8" src="{{ asset('images/logo-ss.jpeg') }}" alt="Spesial Sambal">
+                        <img class="w-13 h-8" src="{{ asset('images/logo-ruang-guru.jpg') }}" alt="Ruang Guru">
+                        <img class="w-13 h-8" src="{{ asset('images/logo-bank-jateng.jpg') }} " alt="Bank Jateng">
+                        <img class="w-10 h-8" src="{{ asset('images/logo-virgin.png') }}" alt="Virgin">
                     </div>
                 </div>
             </div>

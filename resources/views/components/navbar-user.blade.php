@@ -1,12 +1,12 @@
 <nav class="bg-gray-900 border-gray-200 dark:bg-gray-900 w-full">
     <div class="flex items-center justify-between mx-auto p-4 w-full">
         <div class="flex-1 flex justify-center gap-4">
-            <img class="w-8 h-8" src="{{ asset('storage/images/logo-udinus.png') }}" alt="Udinus">
-            <img class="w-8 h-8" src="{{ asset('storage/images/logo-unggul.png') }}" alt="Unggul">
-            <img class="w-8 h-8" src="{{ asset('storage/images/logo-dpm.png') }}" alt="DPMKM Udinus">
-            <img class="w-8 h-8" src="{{ asset('storage/images/logo-parlemen.png') }}" alt="Parlemen">
-            <img class="w-8 h-8" src="{{ asset('storage/images/logo-dinusfest.png') }}" alt="Dinus Fest">
-            <img class="w-8 h-8" src="{{ asset('storage/images/logo-gkc.png') }}" alt="GKC">
+            <img class="w-8 h-8" src="{{ asset('images/logo-udinus.png') }}" alt="Udinus">
+            <img class="w-8 h-8" src="{{ asset('images/logo-unggul.png') }}" alt="Unggul">
+            <img class="w-8 h-8" src="{{ asset('images/logo-dpm.png') }}" alt="DPMKM Udinus">
+            <img class="w-8 h-8" src="{{ asset('images/logo-parlemen.png') }}" alt="Parlemen">
+            <img class="w-8 h-8" src="{{ asset('images/logo-dinusfest.png') }}" alt="Dinus Fest">
+            <img class="w-8 h-8" src="{{ asset('images/logo-gkc.png') }}" alt="GKC">
         </div>
 
         <div class="flex items-center space-x-3 justify-end">

@@ -28,11 +28,10 @@ class ManageStageController extends Controller
         ]);
 
         // Find stage by ID
-        $stage = Stage::findOrFail($id);
-        $stage->title = $request->input('title');
-        $stage->description = $request->input('description');
-
-        $stage->save();
+        Stage::findOrFail($id)->update([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+        ]);
 
         return redirect()->route('manage-stages.index')->with('success', 'Stage updated successfully.');
     }

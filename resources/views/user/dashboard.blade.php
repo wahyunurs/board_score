@@ -8,7 +8,8 @@
             @foreach ($teams as $team)
                 <div
                     class="bg-[#A8DADC] bg-opacity-70 border border-black rounded-xl shadow-lg py-2 px-7 flex flex-col items-center">
-                    <img src="{{ asset('storage/' . $team->logo) }}" alt="{{ $team->name }}" class="w-24 h-24 mb-2">
+                    <img src="{{ asset('storage/logos/' . $team->logo) }}" alt="{{ $team->name }}"
+                        class="w-24 h-24 mb-2">
                     <h2 class="text-2xl font-bold">{{ $team->name }}</h2>
                     <p class="text-2xl font-bold text-yellow-600 score" data-team-id="{{ $team->id }}">
                         {{ $team->score }}
@@ -23,7 +24,7 @@
             console.log("Page loaded, initializing...");
 
             // Preload suara dengan query unik untuk menghindari cache
-            let scoreChangeSound = new Audio("{{ asset('storage/sounds/score-change.mp3') }}?v=" + Date.now());
+            let scoreChangeSound = new Audio("{{ asset('sounds/score-change.mp3') }}?v=" + Date.now());
 
             // Event click pertama untuk unlock audio autoplay
             document.body.addEventListener('click', () => {

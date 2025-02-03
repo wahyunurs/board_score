@@ -32,7 +32,7 @@
                     <div class="flex items-center h-5">
                         <input id="remember_me" type="checkbox"
                             class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 light:bg-gray-700 light:border-gray-600 light:focus:ring-blue-600 light:ring-offset-gray-800 light:focus:ring-offset-gray-800"
-                            required name="remember">
+                            name="remember">
                     </div>
                     <label for="remember_me" class="inline-flex items-center">
                         <span
