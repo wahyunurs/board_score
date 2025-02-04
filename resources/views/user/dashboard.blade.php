@@ -1,23 +1,30 @@
 <x-guest-layout>
-    <div class="container mx-auto p-4 flex flex-col items-center">
+    <div class="w-screen flex flex-col items-center justify-center p-3">
+        <!-- Title -->
         <h2 class="mt-0 mb-4 text-white text-4xl sm:text-5xl font-extrabold text-center drop-shadow-[4px_4px_0px_black]">
             {{ $stages->title }}
         </h2>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 w-full">
+        <!-- Card Grid -->
+        <div
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 w-full items-center justify-center">
             @foreach ($teams as $team)
                 <div
-                    class="bg-[#A8DADC] bg-opacity-70 border border-black rounded-xl shadow-lg py-2 px-7 flex flex-col items-center">
+                    class="bg-[#A8DADC] bg-opacity-70 border border-black rounded-xl shadow-lg p-3 flex flex-col items-center">
                     <img src="{{ asset('storage/logos/' . $team->logo) }}" alt="{{ $team->name }}"
                         class="w-24 h-24 mb-2">
-                    <h2 class="text-2xl font-bold">{{ $team->name }}</h2>
-                    <p class="text-2xl font-bold text-yellow-600 score" data-team-id="{{ $team->id }}">
+                    <p class="text-1xl font-bold text-black text-center drop-shadow-[1px_1px_0px_white]">
+                        {{ $team->name }}</p>
+                    <p class="text-2xl font-bold text-yellow-400 text-center drop-shadow-[3px_2px_0px_black] score"
+                        data-team-id="{{ $team->id }}">
                         {{ $team->score }}
                     </p>
                 </div>
             @endforeach
         </div>
     </div>
+
+
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
