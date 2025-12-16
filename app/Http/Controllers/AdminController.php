@@ -14,7 +14,7 @@ class AdminController extends Controller
     {
         $userCount = User::count();
         $teamCount = Team::count();
-        $stageCount = Stage::count();
+        $stageCount = Stage::count();  
 
         return view('admin.dashboard', compact('userCount', 'teamCount', 'stageCount'));
     }

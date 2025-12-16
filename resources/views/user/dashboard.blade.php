@@ -1,4 +1,6 @@
 <x-guest-layout>
+    @include('user.components.navbar')
+
     <div class="w-screen flex flex-col items-center justify-center p-3">
         <!-- Title -->
         <h2 class="mt-0 mb-4 text-white text-4xl sm:text-5xl font-extrabold text-center drop-shadow-[4px_4px_0px_black]">
@@ -23,7 +25,6 @@
             @endforeach
         </div>
     </div>
-
 
 
     <script>
