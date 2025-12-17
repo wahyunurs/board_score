@@ -23,16 +23,24 @@ class UserSeeder extends Seeder
                 'photo_profile' => null,
             ],
             [
-                'name' => 'Mulyono',
-                'email' => 'mulyono@gmail.com',
-                'password' => bcrypt('mulyono123'),
+                'name' => 'Kompetisi Cerdas Cermat',
+                'email' => 'kcc@gmail.com',
+                'password' => bcrypt('kcc123'),
                 'role' => 'user',
                 'photo_profile' => null,
             ],
         ];
 
         foreach ($users as $user) {
-            User::create($user);
+            User::updateOrCreate(
+                ['email' => $user['email']],
+                [
+                    'name' => $user['name'],
+                    'password' => $user['password'],
+                    'role' => $user['role'],
+                    'photo_profile' => $user['photo_profile'],
+                ]
+            );
         }
     }
 }

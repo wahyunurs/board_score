@@ -18,12 +18,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
 
+    {{-- Cinzel --}}
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    {{-- Archivo Black --}}
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+
+    {{-- Geom --}}
+    <link href="https://fonts.googleapis.com/css2?family=Geom:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    {{-- Sekuya --}}
+    <link href="https://fonts.googleapis.com/css2?family=Sekuya&display=swap" rel="stylesheet">
+
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased"
-    style="background-image: url('{{ asset('images/background-3.png') }}'); background-size: cover; background-attachment: fixed;">
+<body class="font-sans antialiased flex flex-col h-screen w-screen overflow-hidden"
+    style="background-image: url('{{ asset('images/background/background-3.png') }}'); background-size: cover; background-attachment: fixed;">
     {{ $slot }}
 </body>
 

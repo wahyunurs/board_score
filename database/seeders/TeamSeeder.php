@@ -16,34 +16,40 @@ class TeamSeeder extends Seeder
         //Seeding Teams Table
         $teams = [
             [
-                'name' => 'Tim Merah',
+                'name' => 'Manchester United',
                 'score' => 100,
-                'logo' => null,
+                'logo' => 'manchester-united.png',
             ],
             [
-                'name' => 'Tim Biru',
+                'name' => 'Chelsea FC',
                 'score' => 100,
-                'logo' => null,
+                'logo' => 'chelsea-fc.png',
             ],
             [
-                'name' => 'Tim Hijau',
+                'name' => 'Al-Nassr FC',
                 'score' => 100,
-                'logo' => null,
+                'logo' => 'al-nassr-fc.png',
             ],
             [
-                'name' => 'Tim Kuning',
+                'name' => 'Real Madrid CF',
                 'score' => 100,
-                'logo' => null,
+                'logo' => 'real-madrid-cf.png',
             ],
             [
-                'name' => 'Tim Putih',
+                'name' => 'Persebaya Surabaya',
                 'score' => 100,
-                'logo' => null,
+                'logo' => 'persebaya.png',
             ],
         ];
 
         foreach ($teams as $team) {
-            Team::create($team);
+            Team::updateOrCreate(
+                ['name' => $team['name']],
+                [
+                    'score' => $team['score'],
+                    'logo' => $team['logo'],
+                ]
+            );
         }
     }
 }

@@ -1,31 +1,51 @@
 <x-guest-layout>
+    <!-- NAVBAR USER -->
     @include('user.components.navbar')
 
-    <div class="w-screen flex flex-col items-center justify-center p-3">
-        <!-- Title -->
-        <h2 class="mt-0 mb-4 text-white text-4xl sm:text-5xl font-extrabold text-center drop-shadow-[4px_4px_0px_black]">
-            {{ $stages->title }}
+    <div class="overflow-y-auto w-full flex flex-col items-center justify-start">
+        <!-- EVENT NAME -->
+        <h1 class="mt-0 mb-1 text-[#ffc800] text-6xl sm:text-7xl font-extrabold text-center drop-shadow-[4px_4px_0px_black]"
+            style="font-family: 'Cinzel', serif;">
+            KCC
+        </h1>
+        <h2 class="mb-4 text-[#ffc800] text-2xl sm:text-3xl font-bold text-center drop-shadow-[2px_2px_0px_black]"
+            style="font-family: 'Cinzel', serif;">
+            Kompetisi Cerdas Cermat
         </h2>
 
-        <!-- Card Grid -->
+        <!-- STAGE TITLE -->
+        <div class="w-full bg-[#ffc800] p-3 text-center mb-5">
+            <h3 class="text-white text-4xl sm:text-5xl font-extrabold" style="font-family: 'Archivo Black', sans-serif;">
+                {{ $stages->title }}
+            </h3>
+        </div>
+
+        <!-- TEAMS CARD -->
         <div
-            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 w-full items-center justify-center">
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 w-full items-center justify-center px-3">
             @foreach ($teams as $team)
-                <div
-                    class="bg-[#A8DADC] bg-opacity-70 border border-black rounded-xl shadow-lg p-3 flex flex-col items-center">
-                    <img src="{{ asset('storage/logos/' . $team->logo) }}" alt="{{ $team->name }}"
-                        class="w-24 h-24 mb-2">
-                    <p class="text-1xl font-bold text-black text-center drop-shadow-[1px_1px_0px_white]">
-                        {{ $team->name }}</p>
-                    <p class="text-2xl font-bold text-yellow-400 text-center drop-shadow-[3px_2px_0px_black] score"
-                        data-team-id="{{ $team->id }}">
-                        {{ $team->score }}
-                    </p>
+                <div class="bg-[#54326d] border border-[#ffc800] rounded-xl shadow-lg flex flex-col items-center h-64">
+                    <div class="h-32 w-full flex items-center justify-center">
+                        <img src="{{ asset('storage/images/logo-tim/' . $team->logo) }}" alt="{{ $team->name }}"
+                            class="w-28 h-28" />
+                    </div>
+                    <div class="h-20 w-full flex items-center justify-center px-2">
+                        <p class="text-2xl font-bold text-white text-center" style="font-family: 'Geom', sans-serif;">
+                            {{ $team->name }}</p>
+                    </div>
+                    <div class="h-12 w-full bg-[#ffc800] flex items-center justify-center rounded-b-xl">
+                        <p class="text-2xl font-bold text-white text-center score" data-team-id="{{ $team->id }}"
+                            style="font-family: 'Sekuya', sans-serif;">
+                            {{ $team->score }}
+                        </p>
+                    </div>
                 </div>
             @endforeach
         </div>
     </div>
 
+    <!-- FOOTER USER -->
+    @include('user.components.footer')
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {

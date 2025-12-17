@@ -14,9 +14,9 @@ class StageSeeder extends Seeder
     public function run(): void
     {
         //Seed the stages table with some data
-        Stage::create([
-            'title' => 'SEMIFINAL',
-            'description' => '-',
-        ]);
+        Stage::updateOrCreate(
+            ['title' => 'GRANDFINAL'],
+            ['description' => '-']
+        );
     }
 }
