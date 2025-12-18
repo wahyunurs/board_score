@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+use App\Providers\RouteServiceProvider;
+use App\Http\Requests\Auth\LoginRequest;
+use Illuminate\Validation\ValidationException;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -25,7 +27,25 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        $email = $request->email;
+        $password = $request->password;
+
+        // Cek apakah email terdaftar
+        $user = User::where('email', $email)->first();
+
+        if (!$user) {
+            throw ValidationException::withMessages([
+                'email' => 'Email tidak terdaftar.',
+            ]);
+        }
+
+        // Attempt login
+        if (!Auth::attempt(['email' => $email, 'password' => $password], $request->boolean('remember'))) {
+            throw ValidationException::withMessages([
+                'password' => 'Kata sandi salah.',
+            ]);
+        }
+
         $request->session()->regenerate();
 
         // Redirect based on user role
@@ -35,7 +55,8 @@ class AuthenticatedSessionController extends Controller
             return redirect('user/dashboard');
         }
 
-        return redirect()->route('/');
+        // Fallback redirect
+        return redirect('/');
     }
 
     /**
