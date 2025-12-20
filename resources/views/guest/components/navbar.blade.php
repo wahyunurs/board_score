@@ -4,12 +4,10 @@
 
         <div class="flex justify-center">
             <div class="flex justify-center gap-4 bg-white rounded-full py-2 px-6">
-                <img class="w-8 h-8" src="{{ asset('images/header/logo-udinus.png') }}" alt="Udinus">
-                <img class="w-8 h-8" src="{{ asset('images/header/logo-unggul.png') }}" alt="Unggul">
-                <img class="w-8 h-8" src="{{ asset('images/header/logo-dpm.png') }}" alt="DPMKM Udinus">
-                <img class="w-8 h-8" src="{{ asset('images/header/logo-parlemen.png') }}" alt="Parlemen">
-                <img class="w-8 h-8" src="{{ asset('images/header/logo-dinusfest.png') }}" alt="Dinus Fest">
-                <img class="w-8 h-8" src="{{ asset('images/header/logo-gkc.png') }}" alt="GKC">
+                @foreach ($headers as $header)
+                    <img class="w-8 h-8" src="{{ asset('storage/images/header/' . $header->logo) }}"
+                        alt="{{ $header->name }}">
+                @endforeach
             </div>
         </div>
 

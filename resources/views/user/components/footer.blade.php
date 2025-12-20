@@ -5,11 +5,10 @@
         <div class="flex items-center gap-4">
             <p class="font-semibold">Supported by :</p>
             <div class="flex gap-4">
-                <img class="w-8 h-8" src="{{ asset('images/media-partner/logo-foj.png') }}" alt="FOJ">
-                <img class="w-13 h-8" src="{{ asset('images/media-partner/logo-seputar-info-id.jpg') }} " alt="Seputar Info Id">
-                <img class="w-13 h-8" src="{{ asset('images/media-partner/logo-lomba-sma.png') }}" alt="Lomba SMA">
-                <img class="w-13 h-8" src="{{ asset('images/media-partner/logo-pojok-event.jpeg') }}" alt="Pojok Event">
-                <img class="w-13 h-8" src="{{ asset('images/media-partner/logo-partner-event.png') }}" alt="Partner Event">
+                @foreach ($mediaPartners as $mediaPartner)
+                    <img class="w-13 h-8" src="{{ asset('storage/images/media-partner/' . $mediaPartner->logo) }}"
+                        alt="{{ $mediaPartner->name }}">
+                @endforeach
             </div>
         </div>
 
@@ -17,10 +16,10 @@
         <div class="flex items-center gap-4">
             <p class="font-semibold">Sponsored by :</p>
             <div class="flex gap-4">
-                <img class="w-8 h-8" src="{{ asset('images/sponsor/logo-ss.jpeg') }}" alt="Spesial Sambal">
-                <img class="w-13 h-8" src="{{ asset('images/sponsor/logo-ruang-guru.jpg') }}" alt="Ruang Guru">
-                <img class="w-13 h-8" src="{{ asset('images/sponsor/logo-bank-jateng.jpg') }} " alt="Bank Jateng">
-                <img class="w-10 h-8" src="{{ asset('images/sponsor/logo-virgin.png') }}" alt="Virgin">
+                @foreach ($sponsors as $sponsor)
+                    <img class="w-13 h-8" src="{{ asset('storage/images/sponsor/' . $sponsor->logo) }}"
+                        alt="{{ $sponsor->name }}">
+                @endforeach
             </div>
         </div>
     </div>

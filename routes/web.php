@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ManageStageController;
-use App\Http\Controllers\ManageTeamsController;
-use App\Http\Controllers\ManageUsersController;
-use App\Http\Controllers\ManageStagesController;
-use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GuestController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ManageStageController;
+use App\Http\Controllers\Admin\ManageTeamsController;
+use App\Http\Controllers\Admin\ManageUsersController;
+use App\Http\Controllers\Admin\ManageStagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,28 +22,33 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('guest.index');
-});
+Route::get('/', [GuestController::class, 'index'])->name('guest.index');
 
 // Routes for admin
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::prefix('admin')->group(function () {
+        // Dashboard route
+        Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
-    // Routes for manage teams
-    Route::get('/admin/manage-teams', [ManageTeamsController::class, 'index'])->name('manage-teams.index');
-    Route::post('/admin/manage-teams/{id}/update-score', [ManageTeamsController::class, 'updateScore'])->name('admin.teams.updateScore');
-    Route::get('/admin/manage-teams/{id}/score', [ManageTeamsController::class, 'getScore']);
-    Route::post('/admin/manage-teams', [ManageTeamsController::class, 'store'])->name('manage-teams.store');
-    Route::put('/admin/manage-teams/{id}', [ManageTeamsController::class, 'update'])->name('manage-teams.update');
-    Route::delete('/admin/manage-teams/{id}', [ManageTeamsController::class, 'destroy'])->name('manage-teams.destroy');
+        // Routes for manage users
+        Route::get('kelola-pengguna', [ManageUsersController::class, 'index'])->name('manage-users.index');
 
-    // Routes for manage users
-    Route::get('/admin/manage-users', [ManageUsersController::class, 'index'])->name('manage-users.index');
+        // Routes for manage teams
+        Route::prefix('kelola-tim')->group(function () {
+            Route::get('/', [ManageTeamsController::class, 'index'])->name('manage-teams.index');
+            Route::post('{id}/update-score', [ManageTeamsController::class, 'updateScore'])->name('admin.teams.updateScore');
+            Route::get('{id}/score', [ManageTeamsController::class, 'getScore']);
+            Route::post('/', [ManageTeamsController::class, 'store'])->name('manage-teams.store');
+            Route::put('{id}', [ManageTeamsController::class, 'update'])->name('manage-teams.update');
+            Route::delete('{id}', [ManageTeamsController::class, 'destroy'])->name('manage-teams.destroy');
+        });
 
-    // Routes for manage stages
-    Route::get('/admin/manage-stages', [ManageStageController::class, 'index'])->name('manage-stages.index');
-    Route::put('/admin/manage-stages/{id}', [ManageStageController::class, 'update'])->name('manage-stages.update');
+        // Routes for manage stages
+        Route::prefix('kelola-stage')->group(function () {
+            Route::get('/', [ManageStageController::class, 'index'])->name('manage-stages.index');
+            Route::put('{id}', [ManageStageController::class, 'update'])->name('manage-stages.update');
+        });
+    });
 });
 
 // Routes for user

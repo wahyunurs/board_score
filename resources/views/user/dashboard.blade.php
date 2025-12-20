@@ -6,11 +6,11 @@
         <!-- EVENT NAME -->
         <h1 class="mt-0 mb-1 text-[#ffc800] text-6xl sm:text-7xl font-extrabold text-center drop-shadow-[4px_4px_0px_black]"
             style="font-family: 'Cinzel', serif;">
-            KCC
+            {{ $events->short_title ?? 'KCC' }}
         </h1>
         <h2 class="mb-4 text-[#ffc800] text-2xl sm:text-3xl font-bold text-center drop-shadow-[2px_2px_0px_black]"
             style="font-family: 'Cinzel', serif;">
-            Kompetisi Cerdas Cermat
+            {{ $events->long_title ?? 'Kompetisi Cerdas Cermat' }}
         </h2>
 
         <!-- STAGE TITLE -->

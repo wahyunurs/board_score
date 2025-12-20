@@ -1,10 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use App\Models\Team;
+use App\Models\Event;
 use App\Models\Stage;
+use App\Models\Header;
+use App\Models\Sponsor;
+use App\Models\MediaPartner;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
@@ -13,12 +18,14 @@ class UserController extends Controller
      */
     public function dashboard()
     {
-        // Get all teams
+        $events = Event::first();
+        $headers = Header::all();
+        $mediaPartners = MediaPartner::all();
+        $sponsors = Sponsor::all();
         $teams = Team::all();
-        // Find stage by ID
         $stages = Stage::find(1);
 
-        return view('user.dashboard', compact('teams', 'stages'));
+        return view('user.dashboard', compact('teams', 'stages', 'events', 'headers', 'mediaPartners', 'sponsors'));
     }
 
     /**
