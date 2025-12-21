@@ -6,10 +6,14 @@ use App\Http\Controllers\GuestController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ManageEventController;
 use App\Http\Controllers\Admin\ManageStageController;
 use App\Http\Controllers\Admin\ManageTeamsController;
 use App\Http\Controllers\Admin\ManageUsersController;
 use App\Http\Controllers\Admin\ManageStagesController;
+use App\Http\Controllers\Admin\ManageHeadersController;
+use App\Http\Controllers\Admin\ManageSponsorsController;
+use App\Http\Controllers\Admin\ManageMediaPartnersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +33,26 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::prefix('admin')->group(function () {
         // Dashboard route
         Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
+        // Routes for manage events
+        Route::prefix('kelola-acara')->group(function () {
+            Route::get('/', [ManageEventController::class, 'index'])->name('manage-events.index');
+        });
+
+        // Routes for manage headers
+        Route::prefix('kelola-header')->group(function () {
+            Route::get('/', [ManageHeadersController::class, 'index'])->name('manage-headers.index');
+        });
+
+        // Routes for manage sponsors
+        Route::prefix('kelola-sponsor')->group(function () {
+            Route::get('/', [ManageSponsorsController::class, 'index'])->name('manage-sponsors.index');
+        });
+
+        // Routes for manage media partners
+        Route::prefix('kelola-media-partner')->group(function () {
+            Route::get('/', [ManageMediaPartnersController::class, 'index'])->name('manage-media-partners.index');
+        });
 
         // Routes for manage users
         Route::get('kelola-pengguna', [ManageUsersController::class, 'index'])->name('manage-users.index');

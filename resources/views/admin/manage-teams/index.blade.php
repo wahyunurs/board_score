@@ -1,81 +1,163 @@
 <x-app-layout>
-    <x-sidebar></x-sidebar>
-    <x-navbar>
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white light:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                    <!-- Heading & Add New Team Button -->
-                    <div class="flex items-center justify-between mb-3 p-4">
-                        <h2 class="text-2xl font-bold text-gray-800 light:text-white ml-3">Data Teams</h2>
+    <!-- Sidebar toggle controller (peer) -->
+    <input id="menu-toggle" type="checkbox" class="peer sr-only" />
+
+    <!-- Sidebar Admin -->
+    @include('admin.components.sidebar')
+
+    <!-- Navbar Admin -->
+    @include('admin.components.navbar')
+
+    <!-- Main Content -->
+    <main class="ml-0 md:ml-64 peer-checked:md:ml-0 transition-all duration-300">
+        <section class="pt-24 pb-10 bg-[#f0e8f0] min-h-screen">
+            <div class="max-w-7xl mx-auto px-3">
+                <!-- Heading dan Breadcrumb -->
+                <div class="mb-6">
+                    <nav class="text-sm text-gray-500">
+                        <ol class="list-reset flex items-center space-x-2">
+                            <li><a href="{{ route('admin.dashboard') }}"
+                                    class="hover:underline text-purple-600">Admin</a>
+                            </li>
+                            <li><span class="text-purple-400">></span></li>
+                            <li class="text-purple-700 font-semibold">Kelola Tim</li>
+                        </ol>
+                        <h1 class="text-3xl font-bold text-gray-800 mt-2">Kelola Tim</h1>
+                    </nav>
+                </div>
+
+                <!-- Teams Table -->
+                <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-blue-600">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <svg class="w-8 h-8 text-blue-600 mr-3" fill="currentColor" viewBox="0 0 20 18">
+                                <path d="M18 0H6a2 2 0 0 0-2 2h14v12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Z" />
+                                <path
+                                    d="M14 4H2a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2ZM2 16v-6h12v6H2Z" />
+                            </svg>
+                            <h2 class="text-2xl font-bold text-gray-800">Data Tim</h2>
+                        </div>
                         <button
-                            class="text-white bg-blue-500 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mb-4"
+                            class="text-white bg-blue-500 hover:bg-blue-600 font-medium rounded-lg text-sm px-5 py-2.5 transition duration-150"
                             data-modal-target="add-modal" data-modal-toggle="add-modal">
-                            Add New Team
+                            <svg class="w-4 h-4 inline-block mr-2" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 4v16m8-8H4" />
+                            </svg>
+                            Tambah Tim
                         </button>
                     </div>
-                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 light:text-gray-400">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 light:bg-gray-700 light:text-gray-400">
-                            <tr>
-                                <th scope="col" class="px-6 py-3">Logo</th>
-                                <th scope="col" class="px-6 py-3">Team Name</th>
-                                <th scope="col" class="px-6 py-3">Score</th>
-                                <th scope="col" class="px-6 py-3">Update Score</th>
-                                <th scope="col" class="px-6 py-3">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($teams as $team)
-                                <tr class="bg-white border-b light:bg-gray-800 light:border-gray-700">
-                                    <td class="px-6 py-1">
-                                        <img src="{{ asset('storage/logos/' . $team->logo) }}" alt="{{ $team->name }}"
-                                            class="w-16 h-16 rounded-full">
-                                    </td>
-                                    <td class="px-6 py-1 font-medium text-gray-900 light:text-white">
-                                        {{ $team->name }}
-                                    </td>
-                                    <td id="score-{{ $team->id }}" class="score px-6 py-1"
-                                        data-team-id="{{ $team->id }}">
-                                        {{ $team->score }}
-                                    </td>
-                                    <td class="px-6 py-1">
-                                        <form class="flex items-center gap-2 update-score-form"
-                                            data-team-id="{{ $team->id }}">
-                                            <input type="number" name="score"
-                                                class="w-20 p-2 border rounded score-input" placeholder="0">
-                                            <button type="button"
-                                                class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700 update-score-btn">
-                                                Update
-                                            </button>
-                                        </form>
-                                    </td>
-                                    <td class="px-6 py-1">
-                                        <button type="button" data-modal-target="edit-modal-{{ $team->id }}"
-                                            data-modal-toggle="edit-modal-{{ $team->id }}"
-                                            class="edit-button text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5">
-                                            Edit
-                                        </button>
 
-                                        |
-                                        <button data-modal-target="delete-modal-{{ $team->id }}"
-                                            data-modal-toggle="delete-modal-{{ $team->id }}"
-                                            class="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5">
-                                            Delete
-                                        </button>
-                                    </td>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left">
+                            <thead class="text-xs text-gray-700 uppercase bg-blue-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">Logo</th>
+                                    <th scope="col" class="px-6 py-3">Nama Tim</th>
+                                    <th scope="col" class="px-6 py-3">Skor</th>
+                                    <th scope="col" class="px-6 py-3">Update Skor</th>
+                                    <th scope="col" class="px-6 py-3">Aksi</th>
                                 </tr>
-                                @include('admin.manage-teams.edit-modal', ['team' => $team])
-                                @include('admin.manage-teams.delete-modal', ['team' => $team])
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @forelse ($teams as $team)
+                                    <tr class="bg-white border-b hover:bg-blue-50 transition duration-150">
+                                        <td class="px-6 py-4">
+                                            <img src="{{ asset('storage/images/logo-tim/' . $team->logo) }}"
+                                                alt="{{ $team->name }}"
+                                                class="w-12 h-12 rounded-full object-cover border-2 border-blue-200">
+                                        </td>
+                                        <td class="px-6 py-4 font-medium text-gray-900">
+                                            {{ $team->name }}
+                                        </td>
+                                        <td id="score-{{ $team->id }}"
+                                            class="score px-6 py-4 text-gray-900 font-bold"
+                                            data-team-id="{{ $team->id }}">
+                                            {{ $team->score }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <form class="flex items-center gap-2 update-score-form"
+                                                data-team-id="{{ $team->id }}">
+                                                <input type="number" name="score"
+                                                    class="w-20 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 score-input"
+                                                    placeholder="0">
+                                                <button type="button"
+                                                    class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-150 update-score-btn flex items-center gap-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                        height="16" viewBox="0 0 24 24" fill="none"
+                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        class="lucide lucide-refresh-ccw-icon lucide-refresh-ccw">
+                                                        <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                                                        <path d="M3 3v5h5" />
+                                                        <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" />
+                                                        <path d="M16 16h5v5" />
+                                                    </svg>
+                                                    Update
+                                                </button>
+                                            </form>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center gap-2">
+                                                <button type="button"
+                                                    data-modal-target="edit-modal-{{ $team->id }}"
+                                                    data-modal-toggle="edit-modal-{{ $team->id }}"
+                                                    class="edit-button text-white bg-yellow-400 hover:bg-yellow-500 font-medium rounded-lg text-sm px-4 py-2 transition duration-150 flex items-center gap-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                        height="16" viewBox="0 0 24 24" fill="none"
+                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        class="lucide lucide-pencil-icon lucide-pencil">
+                                                        <path
+                                                            d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+                                                        <path d="m15 5 4 4" />
+                                                    </svg>
+                                                    Edit
+                                                </button>
+                                                <button data-modal-target="delete-modal-{{ $team->id }}"
+                                                    data-modal-toggle="delete-modal-{{ $team->id }}"
+                                                    class="text-white bg-red-500 hover:bg-red-600 font-medium rounded-lg text-sm px-4 py-2 transition duration-150 flex items-center gap-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                        height="16" viewBox="0 0 24 24" fill="none"
+                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        class="lucide lucide-trash-icon lucide-trash">
+                                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                                                        <path d="M3 6h18" />
+                                                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                                    </svg>
+                                                    Hapus
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @include('admin.manage-teams.edit-modal', ['team' => $team])
+                                    @include('admin.manage-teams.delete-modal', ['team' => $team])
+                                @empty
+                                    <tr>
+                                        <td colspan="5" class="px-6 py-8 text-center text-gray-500">
+                                            <div class="flex flex-col items-center">
+                                                <svg class="w-16 h-16 text-gray-300 mb-2" fill="none"
+                                                    stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                                                </svg>
+                                                <p class="text-lg font-semibold">Tidak ada data tim</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
-        </div>
+        </section>
+    </main>
 
-        @include('admin.manage-teams.add-modal')
-
-    </x-navbar>
+    @include('admin.manage-teams.add-modal')
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {

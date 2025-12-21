@@ -10,6 +10,7 @@ use App\Models\Sponsor;
 use App\Models\MediaPartner;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Event;
 
 class AdminController extends Controller
 {
@@ -20,6 +21,7 @@ class AdminController extends Controller
         $teamCount = Team::count();
         $mediaPartnerCount = MediaPartner::count();
         $sponsorCount = Sponsor::count();
+        $events = Event::first();
 
         return view(
             'admin.dashboard',
@@ -27,7 +29,8 @@ class AdminController extends Controller
                 'userCount',
                 'teamCount',
                 'mediaPartnerCount',
-                'sponsorCount'
+                'sponsorCount',
+                'events'
             )
         );
     }
