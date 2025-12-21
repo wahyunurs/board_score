@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- Import the CSS file -->
     @vite('resources/css/app.css')
-    <title>Score Board</title>
+    <title>{{ config('app.name', 'ScoreBoard') }}</title>
 </head>
 
 <body>

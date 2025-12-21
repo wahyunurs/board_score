@@ -134,8 +134,6 @@
                     </div>
                 </form>
             </div>
-
-            @vite('resources/js/auth/login.js')
         </div>
     </section>
 @endsection
