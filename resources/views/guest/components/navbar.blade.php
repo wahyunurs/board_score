@@ -16,10 +16,6 @@
                 class="text-white border border-white rounded-full px-6 py-2 hover:bg-[#ffc800] hover:border-[#ffc800] hover:text-white transition-all duration-300">
                 Login
             </a>
-            <a href="{{ route('register') }}"
-                class="text-white border border-white rounded-full px-6 py-2 hover:bg-[#ffc800] hover:border-[#ffc800] hover:text-white transition-all duration-300">
-                Register
-            </a>
         </div>
     </div>
 </nav>

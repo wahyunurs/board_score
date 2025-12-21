@@ -41,24 +41,6 @@
                     </div>
                 </div>
             @endforeach
-            @foreach ($teams as $team)
-                <div class="bg-[#54326d] border border-[#ffc800] rounded-xl shadow-lg flex flex-col items-center h-64">
-                    <div class="h-32 w-full flex items-center justify-center">
-                        <img src="{{ asset('storage/images/logo-tim/' . $team->logo) }}" alt="{{ $team->name }}"
-                            class="w-28 h-28" />
-                    </div>
-                    <div class="h-20 w-full flex items-center justify-center px-2">
-                        <p class="text-2xl font-bold text-white text-center" style="font-family: 'Geom', sans-serif;">
-                            {{ $team->name }}</p>
-                    </div>
-                    <div class="h-12 w-full bg-[#ffc800] flex items-center justify-center rounded-b-xl">
-                        <p class="text-2xl font-bold text-white text-center score" data-team-id="{{ $team->id }}"
-                            style="font-family: 'Sekuya', sans-serif;">
-                            {{ $team->score }}
-                        </p>
-                    </div>
-                </div>
-            @endforeach
         </div>
     </div>
 

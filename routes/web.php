@@ -37,21 +37,29 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         // Routes for manage events
         Route::prefix('kelola-acara')->group(function () {
             Route::get('/', [ManageEventController::class, 'index'])->name('manage-events.index');
+            Route::put('{id}', [ManageEventController::class, 'update'])->name('manage-events.update');
         });
 
         // Routes for manage headers
         Route::prefix('kelola-header')->group(function () {
             Route::get('/', [ManageHeadersController::class, 'index'])->name('manage-headers.index');
+            Route::put('{id}', [ManageHeadersController::class, 'update'])->name('manage-headers.update');
         });
 
         // Routes for manage sponsors
         Route::prefix('kelola-sponsor')->group(function () {
             Route::get('/', [ManageSponsorsController::class, 'index'])->name('manage-sponsors.index');
+            Route::post('/', [ManageSponsorsController::class, 'store'])->name('manage-sponsors.store');
+            Route::put('{id}', [ManageSponsorsController::class, 'update'])->name('manage-sponsors.update');
+            Route::delete('{id}', [ManageSponsorsController::class, 'destroy'])->name('manage-sponsors.destroy');
         });
 
         // Routes for manage media partners
         Route::prefix('kelola-media-partner')->group(function () {
             Route::get('/', [ManageMediaPartnersController::class, 'index'])->name('manage-media-partners.index');
+            Route::post('/', [ManageMediaPartnersController::class, 'store'])->name('manage-media-partners.store');
+            Route::put('{id}', [ManageMediaPartnersController::class, 'update'])->name('manage-media-partners.update');
+            Route::delete('{id}', [ManageMediaPartnersController::class, 'destroy'])->name('manage-media-partners.destroy');
         });
 
         // Routes for manage users

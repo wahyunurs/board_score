@@ -7,7 +7,7 @@
             <!-- Modal header -->
             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t light:border-gray-600">
                 <h3 class="text-lg font-semibold text-gray-900 light:text-white">
-                    Add New Team
+                    Add New Media Partner
                 </h3>
                 <button type="button"
                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center light:hover:bg-gray-600 light:hover:text-white"
@@ -21,23 +21,22 @@
                 </button>
             </div>
             <!-- Modal body -->
-            <form method="POST" action="{{ route('manage-teams.store') }}" id="add-team-form"
+            <form method="POST" action="{{ route('manage-media-partners.store') }}" id="add-media-partner-form"
                 enctype="multipart/form-data" class="p-6 md:p-8">
                 @csrf
                 <div class="grid gap-4 mb-4 grid-cols-2">
                     <div class="col-span-2">
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Team
-                            Name</label>
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Nama
+                            Media Partner</label>
                         <input type="text" name="name" id="name"
                             class="bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                             required>
                     </div>
                     <div class="col-span-2">
-                        <label for="score"
-                            class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Score</label>
-                        <input type="number" name="score" id="score"
-                            class="bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                            required>
+                        <label for="description"
+                            class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Deskripsi</label>
+                        <textarea name="description" id="description" rows="3"
+                            class="bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"></textarea>
                     </div>
                     <div class="col-span-2">
                         <label for="logo"
@@ -48,7 +47,7 @@
                 </div>
                 <button type="submit"
                     class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center light:bg-blue-600 light:hover:bg-blue-700 light:focus:ring-blue-800">Add
-                    Team</button>
+                    Media Partner</button>
             </form>
         </div>
     </div>

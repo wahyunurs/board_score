@@ -38,7 +38,7 @@
 
                     <div class="overflow-x-auto">
                         <table class="w-full text-sm text-left">
-                            <thead class="text-xs text-gray-700 uppercase bg-purple-50">
+                            <thead class="text-xs text-gray-900 uppercase bg-purple-50 font-extrabold">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">No</th>
                                     <th scope="col" class="px-6 py-3">Foto Profil</th>

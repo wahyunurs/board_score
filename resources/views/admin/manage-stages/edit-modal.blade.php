@@ -21,7 +21,7 @@
                 </button>
             </div>
             <!-- Modal body -->
-            <div class="p-4">
+            <div class="p-6 md:p-8">
                 <form method="POST" action="{{ route('manage-stages.update', $stage->id) }}" id="edit-team-form"
                     enctype="multipart/form-data">
                     @csrf

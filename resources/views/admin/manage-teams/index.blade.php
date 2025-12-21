@@ -51,7 +51,7 @@
 
                     <div class="overflow-x-auto">
                         <table class="w-full text-sm text-left">
-                            <thead class="text-xs text-gray-700 uppercase bg-blue-50">
+                            <thead class="text-xs text-gray-900 uppercase bg-blue-50 font-extrabold">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">Logo</th>
                                     <th scope="col" class="px-6 py-3">Nama Tim</th>
@@ -161,12 +161,12 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Fungsi untuk mengambil skor terbaru
+            // Fungsi untuk mengambil skor terbaru secara realtime
             function fetchScores() {
                 document.querySelectorAll('.score').forEach(scoreElement => {
-                    const teamId = scoreElement.getAttribute('data-team-id'); // Ambil teamId dari elemen
+                    const teamId = scoreElement.getAttribute('data-team-id');
 
-                    fetch(`/admin/manage-teams/${teamId}/score`) // Pastikan URL endpoint benar
+                    fetch(`/admin/kelola-tim/${teamId}/score`)
                         .then(response => response.json())
                         .then(data => {
                             if (data.success) {
@@ -178,17 +178,17 @@
                 });
             }
 
-            // Memperbarui skor setiap 1 detik
-            setInterval(fetchScores, 1000); // Update skor setiap 1 detik
+            // Memperbarui skor setiap 1 detik untuk realtime display
+            setInterval(fetchScores, 1000);
         });
 
-
-        // Handle tombol update score
+        // Handle tombol update score (hanya update saat button diklik)
         document.querySelectorAll('.update-score-btn').forEach(button => {
             button.addEventListener('click', function() {
                 const form = this.closest('.update-score-form');
                 const teamId = form.dataset.teamId;
-                const scoreInput = form.querySelector('.score-input').value;
+                const scoreInputElement = form.querySelector('.score-input');
+                const scoreInput = scoreInputElement.value;
 
                 if (!scoreInput || isNaN(scoreInput)) {
                     alert('Please enter a valid score!');
@@ -196,7 +196,7 @@
                 }
 
                 // AJAX request untuk memperbarui skor
-                fetch(`/admin/manage-teams/${teamId}/update-score`, {
+                fetch(`/admin/kelola-tim/${teamId}/update-score`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -212,6 +212,9 @@
                             // Update tampilan skor
                             const scoreCell = document.getElementById(`score-${teamId}`);
                             scoreCell.textContent = data.new_score;
+
+                            // Clear input field setelah berhasil update
+                            scoreInputElement.value = '';
                         } else {
                             alert('Failed to update score!');
                         }

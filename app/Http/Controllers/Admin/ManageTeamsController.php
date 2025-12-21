@@ -81,7 +81,7 @@ class ManageTeamsController extends Controller
         if ($request->hasFile('logo')) {
             $logo = $request->file('logo');
             $filename = date('Y-m-d-') . $logo->getClientOriginalName();
-            $path = 'logos/' . $filename;
+            $path = 'images/logo-tim/' . $filename;
 
             Storage::disk('public')->put($path, file_get_contents($logo));
         }
@@ -116,14 +116,14 @@ class ManageTeamsController extends Controller
         if ($request->hasFile('logo')) {
             $logo = $request->file('logo');
             $filename = date('Y-m-d-') . $logo->getClientOriginalName();
-            $path       = 'logos/' . $filename;
+            $path       = 'images/logo-tim/' . $filename;
 
             // Store the new logo
             Storage::disk('public')->put($path, file_get_contents($logo));
 
             // Delete the logo from storage
             if ($team->logo) {
-                Storage::delete('public/logos/' . $team->logo);
+                Storage::delete('public/images/logo-tim/' . $team->logo);
             }
 
             $newLogo = $filename;
@@ -150,7 +150,7 @@ class ManageTeamsController extends Controller
 
         // Delete the logo from storage
         if ($team->logo) {
-            Storage::delete('public/logos/' . $team->logo);
+            Storage::delete('public/images/logo-tim/' . $team->logo);
         }
 
         // Delete the team

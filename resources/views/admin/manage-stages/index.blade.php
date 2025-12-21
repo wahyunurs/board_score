@@ -30,10 +30,11 @@
                 <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-green-600">
                     <div class="flex items-center justify-between mb-4">
                         <div class="flex items-center">
-                            <svg class="w-8 h-8 text-green-600 mr-3" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                            <svg class="w-8 h-8 text-green-600 mr-3" fill="currentColor" viewBox="0 0 22 21">
+                                <path
+                                    d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
+                                <path
+                                    d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
                             </svg>
                             <h2 class="text-2xl font-bold text-gray-800">Data Stages</h2>
                         </div>
@@ -51,7 +52,7 @@
 
                     <div class="overflow-x-auto">
                         <table class="w-full text-sm text-left">
-                            <thead class="text-xs text-gray-700 uppercase bg-green-50">
+                            <thead class="text-xs text-gray-900 uppercase bg-green-50 font-extrabold">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">ID</th>
                                     <th scope="col" class="px-6 py-3">Judul</th>
